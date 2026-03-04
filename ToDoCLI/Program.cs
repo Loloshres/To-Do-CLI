@@ -1,7 +1,13 @@
-﻿TaskManager mg = new TaskManager();
+﻿using System.Text.Json;
+using System.IO;
+
+TaskManager mg = new TaskManager();
+mg.LoadJSON();
+
 ToDo toDo = new ToDo();
 
 toDo.Interaction(mg);
+
 
 class ToDo
 {
@@ -28,10 +34,12 @@ class ToDo
                     return;
 
                 case 1:
+                    Console.WriteLine("Введите вашу задачу:");
                     nameOfTask = Console.ReadLine();
                     manager.AddTask(nameOfTask);
                     break;
                 case 2:
+                    Console.WriteLine("Введите Id вашей задачи, которую хотите удалить");
                     idOfTask = int.Parse(Console.ReadLine());
                     manager.RemoveTask(idOfTask);
                     break;
@@ -39,6 +47,7 @@ class ToDo
                     manager.ShowTasks();
                     break;
                 case 4:
+                    Console.WriteLine("Введите Id вашей задачи, которую выполнить");
                     idOfTask = int.Parse(Console.ReadLine());
                     manager.SetComplete(idOfTask);
                     break;
@@ -46,7 +55,7 @@ class ToDo
                     Console.WriteLine("Неверная комманда! Попробуйте ещё раз");
                     break;
             }
-            Console.WriteLine("Нажмите на ENTER");
+            Console.WriteLine("Нажмите на ENTER");                                                                                                                                                                                    
             Console.ReadLine();
             Console.WriteLine("---------------------------------------");
         }
@@ -56,9 +65,9 @@ class ToDo
 
 public class TaskItem
 {
-    public int Id { get;}
+    public int Id { get; set; }
     public string Name { get; set; }
-    public bool IsCompleted { get; private set; }
+    public bool IsCompleted { get; set; }
 
     public TaskItem(int id, string name) {Id = id; Name = name;}
 
@@ -73,7 +82,7 @@ public class TaskItem
 
 public class TaskManager
 {
-    public List<TaskItem> Tasks { get; } = new List<TaskItem>();
+    public List<TaskItem> Tasks { get; private set;} = new List<TaskItem>();
     private int _nextId = 1;
     public void AddTask(string name)
     {
@@ -82,6 +91,7 @@ public class TaskManager
             Tasks.Add(new TaskItem(_nextId, name));
             Console.WriteLine("Задача добавлена");
            _nextId++;
+           SaveToJSON();
         }
     }
 
@@ -89,14 +99,15 @@ public class TaskManager
     {
         Tasks.RemoveAll(task => task.Id == id);
         Console.WriteLine($"Задача под номером {id} убрана");
-    }
-
+        SaveToJSON();
+    }    
     public void SetComplete(int id)
     {
         foreach(var task in Tasks)
         {
             if(task.Id == id) {task.MarkAsCompleted();}
         }
+        SaveToJSON();
     }
     public void ShowTasks()
     {
@@ -105,4 +116,25 @@ public class TaskManager
             Console.WriteLine($"{task.Id}. {task.Name} | Статус: {task.IsCompleted}");
         }
     }
+
+    public void SaveToJSON()
+    {
+        string json = JsonSerializer.Serialize(Tasks);
+        File.WriteAllText("task.json", json);
+    }
+
+    public void LoadJSON()
+    {
+        if (File.Exists("task.json"))
+        {
+            string json = File.ReadAllText("task.json");
+            Tasks = JsonSerializer.Deserialize<List<TaskItem>>(json) ?? new List<TaskItem>();
+
+            if (Tasks.Count > 0)
+            {
+                _nextId = Tasks.Max(task => task.Id) + 1;
+            }
+        }
+    }
 }
+
