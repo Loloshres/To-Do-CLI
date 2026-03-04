@@ -1,0 +1,14 @@
+D:\C#Projects\ToDo\ToDoCLI\bin\Debug\net8.0\ToDoCLI.exe
+D:\C#Projects\ToDo\ToDoCLI\bin\Debug\net8.0\ToDoCLI.deps.json
+D:\C#Projects\ToDo\ToDoCLI\bin\Debug\net8.0\ToDoCLI.runtimeconfig.json
+D:\C#Projects\ToDo\ToDoCLI\bin\Debug\net8.0\ToDoCLI.dll
+D:\C#Projects\ToDo\ToDoCLI\bin\Debug\net8.0\ToDoCLI.pdb
+D:\C#Projects\ToDo\ToDoCLI\obj\Debug\net8.0\ToDoCLI.GeneratedMSBuildEditorConfig.editorconfig
+D:\C#Projects\ToDo\ToDoCLI\obj\Debug\net8.0\ToDoCLI.AssemblyInfoInputs.cache
+D:\C#Projects\ToDo\ToDoCLI\obj\Debug\net8.0\ToDoCLI.AssemblyInfo.cs
+D:\C#Projects\ToDo\ToDoCLI\obj\Debug\net8.0\ToDoCLI.csproj.CoreCompileInputs.cache
+D:\C#Projects\ToDo\ToDoCLI\obj\Debug\net8.0\ToDoCLI.dll
+D:\C#Projects\ToDo\ToDoCLI\obj\Debug\net8.0\refint\ToDoCLI.dll
+D:\C#Projects\ToDo\ToDoCLI\obj\Debug\net8.0\ToDoCLI.pdb
+D:\C#Projects\ToDo\ToDoCLI\obj\Debug\net8.0\ToDoCLI.genruntimeconfig.cache
+D:\C#Projects\ToDo\ToDoCLI\obj\Debug\net8.0\ref\ToDoCLI.dll
